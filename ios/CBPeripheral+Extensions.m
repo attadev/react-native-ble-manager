@@ -87,10 +87,11 @@ static char ADVERTISEMENT_RSSI_IDENTIFER;
   // Service Data is a dictionary of CBUUID and NSData
   // Convert to String keys with Array Buffer values
   NSMutableDictionary *serviceData = [dict objectForKey:CBAdvertisementDataServiceDataKey];
+  NSDictionary *serviceDataCopy = [serviceData copy];
   if (serviceData) {
     NSLog(@"%@", serviceData);
     
-    for(CBUUID *key in serviceData) {
+    for(CBUUID *key in serviceDataCopy) {
       [serviceData setObject:dataToArrayBuffer([serviceData objectForKey:key]) forKey:[key UUIDString]];
       [serviceData removeObjectForKey:key];
     }
